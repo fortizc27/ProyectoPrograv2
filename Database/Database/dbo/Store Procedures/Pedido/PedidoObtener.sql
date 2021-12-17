@@ -8,19 +8,19 @@ AS BEGIN
 	
 	SELECT	PE.IdPedido,
 			PE.IdCliente,
+			PE.IdProducto,
 			PE.Codigo,
 			PE.Fecha,
+			PE.Cantidad,
+			PE.PrecioUnitario,
+			PE.Envio,
 			PE.SubTotal,
 			PE.IVA,
 			PE.Total,
 
-			C.IdCliente,
-			C.NombreCliente,
-			C.PrimerAPEllidoCliente,
-			C.SegundoAPEllidoCliente,
-			C.TelefonoCliente,
+			C.NombreCliente + ' ' + C.PrimerAPEllidoCliente + ' ' + C.SegundoAPEllidoCliente as Clientex,
+			C.TelefonoCliente as Telefono,
 
-			PR.IdProducto,
 			PR.Nombre,
 			PR.Precio
 			

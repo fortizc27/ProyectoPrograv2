@@ -1,0 +1,76 @@
+﻿@page
+@model Programacion61.Pages.Producto.EditModel
+@{
+    ViewData["Title"] = (Model.id.HasValue ? "Actualizar Producto" : "Nueva Producto");
+}
+
+<div id="AppEdit" class="container-fluid" data-entity="@JsonSerializer.Serialize(Model.Entity)" v-cloak>
+
+    <div class="card">
+        <div class="card-header">
+            @(Model.id.HasValue? "Actualizar Producto" : "Nuevo Producto")
+        </div>
+        <div class="card-body">
+
+            @*Form Control*@
+            <form id="FormEdit" method="post">
+
+                <input type="hidden" asp-for="Entity.IdProducto" v-model="Entity.IdProducto" />
+
+                @*Categoria*@
+                <div class="form-group mb-3">
+                    <label for="Entity.IdCategoria" class="form-label"></label>Categoria
+
+                    <select asp-for="Entity.IdCategoria" class="form-select" v-model="Entity.IdCategoria"
+                            asp-items="@(new SelectList(Model.CategoriaLista,"IdCategoria","NombreCategoria"))" required>
+                    </select>
+                </div>
+
+                @*Nombre*@
+                <div class="form-group mb-3">
+                    <label for="Entity.Nombre" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" asp-for="Entity.Nombre" v-model="Entity.Nombre"  required />
+                </div>
+
+                @*Cantidad*@
+                <div class="form-group mb-3">
+                    <label for="Entity.Cantidad" class="form-label">Cantidad</label>
+                    <input type="number" class="form-control" asp-for="Entity.Cantidad" v-model="Entity.Cantidad"  required />
+                </div>
+
+                @*Caracteristicas*@
+                <div class="form-group mb-3">
+                    <label for="Entity.Caracteristicas" class="form-label">Caracteristicas</label>
+                    <textarea rows="3" cols="50" class="form-control" asp-for="Entity.Caracteristicas" v-model="Entity.Caracteristicas" maxlength="250" required></textarea>
+                </div>
+
+                @*Precio*@
+                <div class="form-group mb-3">
+                    <label for="Entity.Predcio" class="form-label">Precio</label>
+                    <input type="number" class="form-control" asp-for="Entity.Precio" v-model="Entity.Precio" required />
+                </div>
+
+                @*Estado*@
+                <div class="form-group mb-3">
+                    <label for="Entity.Estado" class="form-label">Activo</label>
+                    <input type="checkbox" class="form-check-input" asp-for="Entity.Estado" v-model="Entity.Estado" />
+                </div>
+
+
+                <div class="row">
+                    <div class="col-4">
+                        <button type="button" @@click="Save" class="btn btn-primary">
+                            @(Model.id.HasValue? "Actualizar" : "Insertar")
+                        </button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script src="~/App/Producto/Edit.js"></script>
+}

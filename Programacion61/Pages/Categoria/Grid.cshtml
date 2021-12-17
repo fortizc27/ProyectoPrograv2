@@ -1,0 +1,59 @@
+﻿@page
+@model Programacion61.Pages.Categoria.GridModel
+@{
+    ViewData["Title"] = "Categorias";
+}
+
+
+<div class="container-fluid">
+    <div class="card">
+        <br />
+        <div class="card-header">Categoria</div>
+        <div class="card-body">
+
+            @*Add Button*@
+            <a class="btn btn-primary" asp-page="Edit">
+                <i class="bx bxs-add-to-queue"></i>
+            </a>
+
+            <div class="row">
+                <div class="col-12">
+                    <table id="GridView" class="table table-bordered table table-stripped table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Nombre</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.GridList)
+                            {
+                                <tr>
+                                    <td>@item.IdCategoria</td>
+                                    <td>@item.NombreCategoria</td>
+                                    <td>
+                                        @*Edit Button*@
+                                        <a class="btn btn-primary" asp-page="Edit" asp-route-id="@item.IdCategoria">
+                                            <i class="bx bx-edit-alt"></i>
+                                        </a>
+
+                                        @*Delete Button*@
+                                        <button type="button" class="btn btn-danger" onclick="CategoriaGrid.OnClickDelete(@item.IdCategoria)">
+                                            <i class="bx bx-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script defer src="~/App/Categoria/Grid.js"></script>
+}

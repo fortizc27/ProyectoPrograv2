@@ -1,0 +1,73 @@
+﻿@page
+@model Programacion61.Pages.Usuario.EditModel
+@{
+
+}
+
+<div id="AppEdit" class="container" data-entity="@JsonSerializer.Serialize(Model.Entity)" v-cloak>
+    <div class="card">
+        <div class="card-header">
+            @(!String.IsNullOrEmpty(Model.Id)? "Actualizar": "Nuevo Usuario")
+        </div>
+        <div class="card-body">
+            <form id="FormEdit" method="post">
+
+                @if (!String.IsNullOrEmpty(Model.Id))
+                {
+                    <input type="hidden" asp-for="Entity.Usuario" v-model="Entity.Usuario" />
+                }
+                else
+                {
+                    <div class="form-group mb-3">
+                        <label for="Entity.Usuario" class="form-label">Usuario</label>
+                        <input type="text" class="form-control" asp-for="Entity.Usuario" v-model="Entity.Usuario" maxlength="10" required>
+                    </div>
+                }
+
+                <div class="form-group mb-3">
+                    <label for="Entity.Nombre" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" asp-for="Entity.Nombre" v-model="Entity.Nombre" maxlength="250" required>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="Entity.Clave" class="form-label">Contraseña</label>
+                    <input type="password" class="form-control" asp-for="Entity.Clave" v-model="Entity.Clave" maxlength="250" required>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="Entity.Nombre" class="form-label">Rol</label>
+                    <select asp-for="Entity.Rol_id" class="form-select" v-model="Entity.Rol_id" required>
+                        <option value="1">Administrador</option>
+                        <option value="2" selected>Super Usuario</option>
+                        <option value="3">Sólo Lectura</option>
+                    </select>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="Entity.Estado" class="form-label">Estado</label>
+                    <input type="checkbox" class="form-check-input" asp-for="Entity.Estado" v-model="Entity.Estado">
+                </div>
+
+                <div class="row">
+                    <div class="col-4">
+                        <button type="button" @@click="Save" class="btn btn-primary">
+                            @(!String.IsNullOrEmpty(Model.Id)? "Actualizar": "Agregar")
+                        </button>
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+</div>
+
+@section Scripts
+{
+
+    <script defer src="~/App/Usuario/Edit.js"></script>
+
+
+}

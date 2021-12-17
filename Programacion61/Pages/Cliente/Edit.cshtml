@@ -1,0 +1,81 @@
+﻿@page
+@model Programacion61.Pages.Cliente.EditModel
+@{
+   ViewData["Title"] = (Model.id.HasValue ? "Actualizar Cliente" : "Nuevo Cliente");
+}
+
+
+<div id="AppEdit" class="container-fluid" data-entity="@JsonSerializer.Serialize(Model.Entity)" v-cloak>
+
+    <div class="card">
+        <div class="card-header">
+            @(Model.id.HasValue? "Actualizar Cliente" : "Nuevo Cliente")
+        </div>
+        <div class="card-body">
+
+            @*Form Control*@
+            <form id="FormEdit" method="post">
+
+                <input type="hidden" asp-for="Entity.IdCliente" v-model="Entity.IdCliente" />
+
+                @*Nombre del Cliente*@
+                <div class="form-group mb-3">
+                    <label for="Entity.NombreCliente" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" asp-for="Entity.NombreCliente" v-model="Entity.NombreCliente" maxlength="50" required />
+                </div>
+
+                @*Primer Apellido del Cliente*@
+                <div class="form-group mb-3">
+                    <label for="Entity.PrimerApellidoCliente" class="form-label">Primer Apellido</label>
+                    <input type="text" class="form-control" asp-for="Entity.PrimerApellidoCliente" v-model="Entity.PrimerApellidoCliente" maxlength="50" required />
+                </div>
+
+                @*Segundo Apellido del Cliente*@
+                <div class="form-group mb-3">
+                    <label for="Entity.SegundoApellidoCliente" class="form-label">Segundo Apellido</label>
+                    <input type="text" class="form-control" asp-for="Entity.SegundoApellidoCliente" v-model="Entity.SegundoApellidoCliente" maxlength="50" required />
+                </div>
+
+                @*Direccion del Cliente*@
+                <div class="form-group mb-3">
+                    <label for="Entity.DireccionCliente" class="form-label">Direccion</label>
+                    <textarea rows="3" cols="50" class="form-control" asp-for="Entity.DireccionCliente" v-model="Entity.DireccionCliente" maxlength="250" required ></textarea>
+                </div>
+
+                @*Fecha de Nacimiento del Cliente*@
+            <div class="form-group mb-3">
+                <label for="Entity.FechaDeNacimientoCliente" class="form-label">Fecha de Nacimiento</label>
+                @*<input type="date" class="form-control" asp-for="Entity.FechaDeNacimientoCliente" v-model="Entity.FechaDeNacimientoCliente" required />*@
+                <b-form-datepicker id="FechaDeNacimientoCliente" name="FechaDeNacimientoCliente" v-model="Entity.FechaDeNacimientoCliente"  class="form-control"  required>
+                </b-form-datepicker>
+            </div>
+
+                @*Telefono del Cliente*@
+                <div class="form-group mb-3">
+                    <label for="Entity.TelefonoCliente" class="form-label">Nu. Telefono</label>
+                    <input type="number" class="form-control" asp-for="Entity.TelefonoCliente" v-model="Entity.TelefonoCliente" maxlength="50" required />
+                </div>
+
+                @*Cedula del Cliente*@
+                <div class="form-group mb-3">
+                    <label for="Entity.CedulaCliente" class="form-label">Cedula</label>
+                    <input type="text" class="form-control" asp-for="Entity.CedulaCliente" v-model="Entity.CedulaCliente" maxlength="50" required />
+                </div>
+
+                <div class="row">
+                    <div class="col-4">
+                        <button type="button" @@click="Save" class="btn btn-primary">
+                            @(Model.id.HasValue? "Actualizar" : "Insertar")
+                        </button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script src="~/App/Cliente/Edit.js"></script>
+}

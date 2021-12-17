@@ -1,0 +1,42 @@
+﻿@page
+@model Programacion61.Pages.Categoria.EditModel
+@{
+    ViewData["Title"] = (Model.id.HasValue ? "Actualizar Categoria" : "Nueva Categoria");
+}
+
+<div id="AppEdit" class="container-fluid" data-entity="@JsonSerializer.Serialize(Model.Entity)" v-cloak>
+
+    <div class="card">
+        <div class="card-header">
+            @(Model.id.HasValue? "Actualizar Categoria" : "Nueva Categoria")
+        </div>
+        <div class="card-body">
+
+            @*Form Control*@
+            <form id="FormEdit" method="post">
+
+                <input type="hidden" asp-for="Entity.IdCategoria" v-model="Entity.IdCategoria" />
+
+                @*Nombre de la Categoria*@
+                <div class="form-group mb-3">
+                    <label for="Entity.NombreCategoria" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" asp-for="Entity.NombreCategoria" v-model="Entity.NombreCategoria" maxlength="50" required />
+                </div>
+
+                <div class="row">
+                    <div class="col-4">
+                        <button type="button" @@click="Save" class="btn btn-primary">
+                            @(Model.id.HasValue? "Actualizar" : "Insertar")
+                        </button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script src="~/App/Categoria/Edit.js"></script>
+}

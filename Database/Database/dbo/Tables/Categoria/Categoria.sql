@@ -1,0 +1,6 @@
+﻿CREATE TABLE [dbo].[Categoria]
+(
+	[IdCategoria] INT NOT NULL IDENTITY(1,1) CONSTRAINT PK_IdCategoria PRIMARY KEY CLUSTERED([IdCategoria])
+	,[NombreCategoria] VARCHAR(50) NOT NULL
+) WITH (DATA_COMPRESSION = PAGE)
+GO

@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WBL", "WBL\WBL.csproj", "{B
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Programacion61", "Programacion61\Programacion61.csproj", "{E0B37F07-C705-4E50-8844-6DD11BC0CEC6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI", "WebAPI\WebAPI.csproj", "{66F62CE8-7AC0-4C4D-AF06-4E258FDAE844}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAPI", "WebAPI\WebAPI.csproj", "{66F62CE8-7AC0-4C4D-AF06-4E258FDAE844}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -40,9 +40,9 @@ AS BEGIN
 				,@Cantidad
 				,@PrecioUnitario
 				,@Envio
-				,@SubTotal
-				,@IVA
-				,@Total
+				,(@Cantidad * @PrecioUnitario) + @Envio
+				,((@Cantidad * @PrecioUnitario) + @Envio) * 0.13
+				,((@Cantidad * @PrecioUnitario) + @Envio) * 1.13
 			)
 			
 			COMMIT TRANSACTION TRANS

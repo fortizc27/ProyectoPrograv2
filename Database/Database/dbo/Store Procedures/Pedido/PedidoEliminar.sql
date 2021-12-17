@@ -6,9 +6,17 @@ AS BEGIN
   
 	SET NOCOUNT ON
 
+
 		BEGIN TRANSACTION TRAS
 		BEGIN TRY
 			
+			Update Pr
+			set Pr.Cantidad = Pr.Cantidad + Pe.Cantidad
+			from 
+				[dbo].[Producto] Pr inner join
+				[dbo].[Pedido] Pe
+				  on Pr.IdProducto = Pe.IdProducto
+
 			DELETE FROM [dbo].[Pedido]
 			WHERE IdPedido = @IdPedido
 			

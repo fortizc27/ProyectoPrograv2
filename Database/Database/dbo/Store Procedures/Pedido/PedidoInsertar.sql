@@ -14,39 +14,53 @@ AS BEGIN
   
 	SET NOCOUNT ON
 
+	declare @Existencias int
+	SELECT @Existencias = Cantidad FROM Producto WHERE IdProducto = @IdProducto;
+
 	BEGIN TRANSACTION TRANS
 	
 		BEGIN TRY 
+
+			IF @Cantidad <= @Existencias
+			BEGIN
+				INSERT INTO [dbo].[Pedido]
+				( 
+					IdCliente
+					,IdProducto
+					,Codigo
+					,Fecha
+					,Cantidad
+					,PrecioUnitario
+					,Envio
+					,SubTotal
+					,IVA
+					,Total
+				)
+				VALUES
+				(
+					@IdCliente
+					,@IdProducto
+					,@Codigo
+					,@Fecha
+					,@Cantidad
+					,@PrecioUnitario
+					,@Envio
+					,(@Cantidad * @PrecioUnitario) + @Envio
+					,((@Cantidad * @PrecioUnitario) + @Envio) * 0.13
+					,((@Cantidad * @PrecioUnitario) + @Envio) * 1.13
+				)
+
+				Update [dbo].[Producto]
+				set Cantidad = Cantidad - @Cantidad
+				WHERE IdProducto = @IdProducto;
 			
-			INSERT INTO [dbo].[Pedido]
-			( 
-				IdCliente
-				,IdProducto
-				,Codigo
-				,Fecha
-				,Cantidad
-				,PrecioUnitario
-				,Envio
-				,SubTotal
-				,IVA
-				,Total
-			)
-			VALUES
-			(
-				@IdCliente
-				,@IdProducto
-				,@Codigo
-				,@Fecha
-				,@Cantidad
-				,@PrecioUnitario
-				,@Envio
-				,(@Cantidad * @PrecioUnitario) + @Envio
-				,((@Cantidad * @PrecioUnitario) + @Envio) * 0.13
-				,((@Cantidad * @PrecioUnitario) + @Envio) * 1.13
-			)
-			
-			COMMIT TRANSACTION TRANS
-			SELECT 0 AS CodeError, '' AS MsgError
+				COMMIT TRANSACTION TRANS
+				SELECT 0 AS CodeError, '' AS MsgError
+				END
+				ELSE
+				BEGIN
+					SELECT -1 AS CodeError, 'No hay existencias suficientes' AS MsgError
+				END
 
 		END TRY
 
